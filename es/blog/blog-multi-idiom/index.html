@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="Sitio personal de Reny Ramos @DesolatorMagno">
+
+        <meta property="og:title" content="Blog multi-idioma con Jigsaw | DesolatorMagno Blog"/>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://my-jigsaw-blog.com/es/blog/blog-multi-idiom"/>
+        <meta property="og:description" content="Sitio personal de Reny Ramos @DesolatorMagno" />
+
+        <title>Blog multi-idioma con Jigsaw | DesolatorMagno Blog</title>
+
+        <link rel="home" href="https://my-jigsaw-blog.com">
+        <link rel="icon" href="/favicon.ico">
+        <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="DesolatorMagno Blog Atom Feed">
+            <meta property="og:title" content="Blog multi-idioma con Jigsaw" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://my-jigsaw-blog.com/es/blog/blog-multi-idiom"/>
+    <meta property="og:description" content="Configuracion del tema blog Jigsaw para trabajar multi-idioma" />
+
+                    <!-- Insert analytics code here -->
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/build/css/main.css?id=e615ee6e8e18c76e5c03">
+    </head>
+
+    <body class="flex flex-col justify-between min-h-screen bg-gray-100 text-gray-800 leading-normal font-sans">
+        <header class="flex items-center shadow bg-white border-b h-24 py-4" role="banner">
+            <div class="container flex items-center max-w-8xl mx-auto px-4 lg:px-8">
+                <div class="flex items-center">
+                    <a href="/es" title="DesolatorMagno Blog home" class="inline-flex items-center">
+                        <img class="h-8 md:h-10 mr-3" src="/assets/img/logo.svg" alt="DesolatorMagno Blog logo" />
+
+                        <h1 class="text-lg md:text-2xl text-blue-800 font-semibold hover:text-blue-600 my-0">DesolatorMagno Blog</h1>
+                    </a>
+                </div>
+
+                <div id="vue-search" class="flex flex-1 justify-end items-center">
+                    <search></search>
+
+                    <nav class="hidden lg:flex items-center justify-end text-lg">
+    <a title="DesolatorMagno Blog Blog" href="/es/blog"
+        class="ml-6 text-gray-700 hover:text-blue-600 ">
+        Blog
+    </a>
+
+    <a title="DesolatorMagno Blog About" href="/es/about"
+        class="ml-6 text-gray-700 hover:text-blue-600 ">
+        About
+    </a>
+
+    
+      <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+          <div class="relative">
+            <select class="block appearance-none w-full bg-gray-100 border border-gray-300 text-gray-700 py-1 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-300" id="idiom-select">
+              <option value="en" >En</option>
+              <option value="es" selected>Es</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
+      </div>
+</nav>
+
+                    <button class="flex justify-center items-center bg-blue-500 border border-blue-500 h-10 px-5 rounded-full lg:hidden focus:outline-none"
+    onclick="navMenu.toggle()"
+>
+    <svg id="js-nav-menu-show" xmlns="http://www.w3.org/2000/svg"
+        class="fill-current text-white h-9 w-4" viewBox="0 0 32 32"
+    >
+        <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/>
+    </svg>
+
+    <svg id="js-nav-menu-hide" xmlns="http://www.w3.org/2000/svg"
+        class="hidden fill-current text-white h-9 w-4" viewBox="0 0 36 30"
+    >
+        <polygon points="32.8,4.4 28.6,0.2 18,10.8 7.4,0.2 3.2,4.4 13.8,15 3.2,25.6 7.4,29.8 18,19.2 28.6,29.8 32.8,25.6 22.2,15 "/>
+    </svg>
+</button>
+
+                </div>
+            </div>
+        </header>
+
+        <nav id="js-nav-menu" class="nav-menu hidden lg:hidden">
+    <ul class="my-0">
+        <li class="pl-3">
+            <a
+                title="DesolatorMagno Blog Blog"
+                href="/es/blog"
+                class="nav-menu__item hover:text-blue-500 "
+            >Blog</a>
+        </li>
+        <li class="pl-3">
+            <a
+                title="DesolatorMagno Blog About"
+                href="/es/about"
+                class="nav-menu__item hover:text-blue-500 "
+            >About</a>
+        </li>
+        
+        <li class="pl-3">
+            <div class="md:w-1/6 px-1 mb-6 md:mb-0">
+                <div class="relative">
+                    <select class="block appearance-none bg-gray-300 border border-gray-500 text-gray-800 py-2 px-2 pr-6 rounded focus:outline-none focus:bg-white focus:border-gray-400" id="idiom-select-r">
+                    <option value="en" >En</option>
+                    <option value="es" selected>Es</option>
+                  </select>
+                </div>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+
+        <main role="main" class="flex-auto w-full container max-w-4xl mx-auto py-16 px-6">
+                
+    <h1 class="leading-none mb-2">Blog multi-idioma con Jigsaw</h1>
+
+    <p class="text-gray-700 text-xl md:mt-0">Reny Ramos  •  August 10, 2020</p>
+    
+                        <a
+                href="/es/blog/categories/jigsaw"
+                title="View posts in jigsaw"
+                class="inline-block bg-gray-300 hover:bg-blue-200 leading-loose tracking-wide text-gray-800 uppercase text-xs font-semibold rounded mr-4 px-3 pt-px"
+            >jigsaw</a>
+                    <a
+                href="/es/blog/categories/programming"
+                title="View posts in programming"
+                class="inline-block bg-gray-300 hover:bg-blue-200 leading-loose tracking-wide text-gray-800 uppercase text-xs font-semibold rounded mr-4 px-3 pt-px"
+            >programming</a>
+            
+    <div class="border-b border-blue-200 mb-10 pb-4" v-pre>
+        <p>La posibilidad de pasar de cero a tener un blog funcional, con una interfaz limpia y completamente estática, en cuestión de minutos, es algo realmente genial, sin embargo, la opción de multi-idioma es un punto bastante interesante y el cual es pasado por alto por la gente de Jigsaw, es por eso que es algo sobre lo que deseo plantear una opción viable en este post.</p>
+
+<p>La idea principal es crear una copia del contenido por cada lenguaje y encargarse de el redireccionamiento, esta es una táctica con la cual experimente para la documentación en git, sin embargo le aplique algunos cambios y mejoras para ser usale en jigsaw y la adapte para blogs.</p>
+
+<p>Debo aclarar que tomare como hecho que ya esta instalado y configurado el template de blog que trae jigsaw (del cual se habla <a href="https://jigsaw.tighten.co/docs/starter-templates/">en este link</a>), que ya se compilo y esta en funcionamiento sin ningún problema, ademas de que el lector posee cierto conocimiento de programación, finalmente para facilitar un poco el proceso y la lectura procederé a separar en secciones.</p>
+
+<h2>Contenido estático</h2>
+
+<p>El multi-idioma para Index, About y Contact es la parte mas sencilla, para esto simplemente se creara una carpeta por cada idioma en la raíz de source con el formato <code>\en</code> y <code>\es</code>, luego procederemos a copiar los archivos en cada carpeta, por ultimo el archivo <code>index.blade.php</code> lo reemplazaremos con un sencillo script el cual se encargara de redirecionar la pagina al idioma que deseamos tener como base.</p>
+
+<pre><code class="language-javascript">&lt;script&gt;
+    window.location.href = "{{ $page-&gt;getPath() . '/en' }}"
+&lt;/script&gt;
+</code></pre>
+
+<p>Adicionalmente tenemos la opcion de hacer lo mismo con todas las paginas de contenido estático que estén en la raíz, la idea es que solo se pueda acceder a la versión con idioma.</p>
+
+<h2>Selector de idioma.</h2>
+
+<p>Aquí es donde comienza lo divertido, existen varias opciones pero me iré por la que me parece mas sencilla, 2 selects con los idiomas que se pueden seleccionar, uno para el menú responsive y otro para el menú para desktop, muy parecidos entre si pero con algunas diferencias claves, como estilo.</p>
+
+<p><strong>Responsive</strong></p>
+
+<pre><code>&lt;div class="md:w-1/6 px-1 mb-6 md:mb-0"&gt;
+    &lt;div class="relative"&gt;
+        &lt;select class="block appearance-none bg-gray-300 border border-gray-500 text-gray-800 py-2 px-2 pr-6 rounded focus:outline-none focus:bg-white focus:border-gray-400" id="idiom-select-r"&gt;
+        &lt;option value="en" {{ $page-&gt;get_lang() == 'en' ? 'selected' : ''}}&gt;En&lt;/option&gt;
+        &lt;option value="es" {{ $page-&gt;get_lang() == 'es' ? 'selected' : ''}}&gt;Es&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><strong>Desktop</strong></p>
+
+<pre><code>&lt;div class="w-full md:w-1/2 px-1 mb-6 md:mb-0"&gt;
+    &lt;div class="relative"&gt;
+    &lt;select class="block appearance-none w-full bg-gray-100 border border-gray-300 text-gray-700 py-1 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-300" id="idiom-select"&gt;
+        &lt;option value="en" {{ $page-&gt;get_lang() == 'en' ? 'selected' : ''}}&gt;En&lt;/option&gt;
+        &lt;option value="es" {{ $page-&gt;get_lang() == 'es' ? 'selected' : ''}}&gt;Es&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"&gt;
+        &lt;svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"&gt;&lt;path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/&gt;&lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Y para el control de la lógica del cambio de idioma un pequeño script que se deberá anexar al layout.</p>
+
+<pre><code class="language-javascript">&lt;script&gt;
+    function updateLang() {
+        let url = "{{ $page-&gt;getUrl() }}"
+        let newlang = document.getElementById(this.id).value
+        if ({{ $page-&gt;slug_has_lang() }}) {
+            let lang = "{{ $page-&gt;get_lang() }}"
+            url = url.replace('/' + lang ,'/' + newlang)
+        } else {
+            //Else (la pagina no tiene idioma y se lo agrego)
+            url = url.replace("{{ $page-&gt;getPath() }}", '/' + newlang + "{{ $page-&gt;getPath() }}")
+        }
+        window.location.href = url
+    }
+
+    document.getElementById('idiom-select').addEventListener("change", updateLang, false)
+    document.getElementById('idiom-select-r').addEventListener("change", updateLang, false)
+&lt;/script&gt;
+</code></pre>
+
+<p>Para aquellos que tengan experiencia con Jigsaw o que sean muy curiosos notaran un método que no viene por defecto <code>{{ $page-&gt;get_lang() }}</code>, este es un metodo personalizado que cree en el archivo de configuración, el cual se encarga de comprobar el idioma actual que esta seleccionado y retornarlo.</p>
+
+<pre><code>'get_lang'          =&gt; function ($page) {
+    if ($page-&gt;getPath()[0] !== '/') {
+        return $page-&gt;getPath()[0] . $page-&gt;getPath()[1];
+    }
+    return $page-&gt;getPath()[1] . $page-&gt;getPath()[2];
+},
+</code></pre>
+
+<h2>Posts Multi-idioma.</h2>
+
+<p>Con los post comenzaremos con una técnica parecida a la de los archivos estáticos, crearemos una carpeta por cada idioma que se desee soportar en el rot de source, tomando como base la siguiente nomenclatura <code>_post_en</code> y <code>_post_es</code>, como es de esperar, dentro de cada carpeta tendremos una copia de cada post en su idioma.</p>
+
+<p>Dentro de <code>config.php</code> en el área de collection, procederemos crear una nueva collection por cada idioma de los post, los cuales seguirán esta nomenclatura.</p>
+
+<pre><code class="language-php">'posts_es'      =&gt; [
+    'author' =&gt; 'Reny Ramos', // Default author, if not provided in a post
+    'sort'   =&gt; '-date',
+    'path'   =&gt; 'es/blog/{filename}',
+],
+'posts_en'      =&gt; [
+    'author' =&gt; 'Reny Ramos', // Default author, if not provided in a post
+    'sort'   =&gt; '-date',
+    'path'   =&gt; 'en/blog/{filename}',
+],
+</code></pre>
+
+<p>Con estos cambios ya se debería tener la base para un blog multi-idioma bastante funcional, para el próximo post hablare sobre como configurar las categorías para ser multi-idioma y que solo muestren post en su idioma, y con algo de suerte también sobre un nuevo feature llamado de forma temporal "serie" con el cual estoy experimentando actualmente.</p>
+    </div>
+
+    <nav class="flex justify-between text-sm md:text-base">
+        <div>
+                            <a href="https://my-jigsaw-blog.com/es/blog/hello-world" title="Older Post: Bienvenidos a mi sitio personal">
+                    &LeftArrow; Bienvenidos a mi sitio personal
+                </a>
+                    </div>
+
+        <div>
+                    </div>
+    </nav>
+        </main>
+
+        <footer class="bg-white text-center text-sm mt-12 py-4" role="contentinfo">
+            <ul class="flex flex-col md:flex-row justify-center list-none">
+                <li class="md:mr-2">
+                    &copy; <a href="https://tighten.co" title="Tighten website">Tighten</a> 2020.
+                </li>
+
+                <li>
+                    Built with <a href="http://jigsaw.tighten.co" title="Jigsaw by Tighten">Jigsaw</a>
+                    and <a href="https://tailwindcss.com" title="Tailwind CSS, a utility-first CSS framework">Tailwind CSS</a>.
+                </li>
+            </ul>
+        </footer>
+
+        <script src="/assets/build/js/main.js?id=24219f896efae18349dc"></script>
+        <script>
+    const navMenu = {
+        toggle() {
+            const menu = document.getElementById('js-nav-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('lg:block');
+            document.getElementById('js-nav-menu-hide').classList.toggle('hidden');
+            document.getElementById('js-nav-menu-show').classList.toggle('hidden');
+        },
+    }
+</script>
+        <script>
+    function updateLang() {
+        let url = "https://my-jigsaw-blog.com/es/blog/blog-multi-idiom"
+        let newlang = document.getElementById(this.id).value
+        if (1) {
+            let lang = "es"
+            url = url.replace('/' + lang ,'/' + newlang)
+        } else {
+            //Else (la pagina no tiene idioma y se lo agrego)
+            url = url.replace("/es/blog/blog-multi-idiom", '/' + newlang + "/es/blog/blog-multi-idiom")
+        }
+        window.location.href = url
+    }
+
+    document.getElementById('idiom-select').addEventListener("change", updateLang, false)
+    document.getElementById('idiom-select-r').addEventListener("change", updateLang, false)
+</script>    </body>
+</html>
