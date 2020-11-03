@@ -214,12 +214,11 @@
    @endcomponent
 &lt;/body&gt;
 &lt;/html&gt;
- ```
+</code></pre>
 
-Como paso extra podemos mejorar un poco ese codigo JS JavaScript, para evitar declarar la const Toast y encadenar directamente las acciones de la siguiente forma.
+<p>Como paso extra podemos mejorar un poco ese codigo JS JavaScript, para evitar declarar la const Toast y encadenar directamente las acciones de la siguiente forma.</p>
 
-```js
-&lt;script&gt;
+<pre><code class="language-js">&lt;script&gt;
    const ToastAlert = (type, title, text = '', timeout = 4000, position= 'top-end') =&gt; {
        Swal.mixin({
            toast: true,
