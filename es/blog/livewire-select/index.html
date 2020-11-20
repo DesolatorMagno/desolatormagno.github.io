@@ -6,20 +6,20 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="description" content="Sitio personal de Reny Ramos @DesolatorMagno">
 
-        <meta property="og:title" content="Notificaciones con SweetAlert2 desde Livewire | DesolatorMagno Blog"/>
+        <meta property="og:title" content="Select dependiente desde Livewire | DesolatorMagno Blog"/>
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://desolatormagno.github.io/es/blog/livewire-notifications"/>
+        <meta property="og:url" content="https://desolatormagno.github.io/es/blog/livewire-select"/>
         <meta property="og:description" content="Sitio personal de Reny Ramos @DesolatorMagno" />
 
-        <title>Notificaciones con SweetAlert2 desde Livewire | DesolatorMagno Blog</title>
+        <title>Select dependiente desde Livewire | DesolatorMagno Blog</title>
 
         <link rel="home" href="https://desolatormagno.github.io">
         <link rel="icon" href="/favicon.ico">
         <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="DesolatorMagno Blog Atom Feed">
-            <meta property="og:title" content="Notificaciones con SweetAlert2 desde Livewire" />
+            <meta property="og:title" content="Select dependiente desde Livewire" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://desolatormagno.github.io/es/blog/livewire-notifications"/>
-    <meta property="og:description" content="Utilizacion de notificaciones SweetAlert2 desde Livewire." />
+    <meta property="og:url" content="https://desolatormagno.github.io/es/blog/livewire-select"/>
+    <meta property="og:description" content="Select dependiente desde Livewire parte01." />
 
                     <!-- Insert analytics code here -->
         
@@ -118,11 +118,10 @@
 
 
         <main role="main" class="flex-auto w-full container max-w-4xl mx-auto py-16 px-6">
-                        <img src="/assets/img/livewire.png" alt="Notificaciones con SweetAlert2 desde Livewire cover image" class="mb-2">
-    
-    <h1 class="leading-none mb-2">Notificaciones con SweetAlert2 desde Livewire</h1>
+                
+    <h1 class="leading-none mb-2">Select dependiente desde Livewire</h1>
 
-    <p class="text-gray-700 text-xl md:mt-0">Reny Ramos  •  November 1, 2020</p>
+    <p class="text-gray-700 text-xl md:mt-0">Reny Ramos  •  November 18, 2020</p>
     
                         <a
                 href="/es/blog/categories/laravel"
@@ -140,126 +139,186 @@
                 class="inline-block bg-gray-300 hover:bg-blue-200 leading-loose tracking-wide text-gray-800 uppercase text-xs font-semibold rounded mr-4 px-3 pt-px"
             >livewire1.x</a>
                     <a
-                href="/es/blog/categories/sweetalert2"
-                title="View posts in sweetalert2"
-                class="inline-block bg-gray-300 hover:bg-blue-200 leading-loose tracking-wide text-gray-800 uppercase text-xs font-semibold rounded mr-4 px-3 pt-px"
-            >sweetalert2</a>
-                    <a
-                href="/es/blog/categories/notifications"
-                title="View posts in notifications"
-                class="inline-block bg-gray-300 hover:bg-blue-200 leading-loose tracking-wide text-gray-800 uppercase text-xs font-semibold rounded mr-4 px-3 pt-px"
-            >notifications</a>
-                    <a
                 href="/es/blog/categories/programming"
                 title="View posts in programming"
                 class="inline-block bg-gray-300 hover:bg-blue-200 leading-loose tracking-wide text-gray-800 uppercase text-xs font-semibold rounded mr-4 px-3 pt-px"
             >programming</a>
             
     <div class="border-b border-blue-200 mb-10 pb-4" v-pre>
-        <p>En ocasiones cuando se trabaja ya sea tanto con Librerías o Frameworks de JS como con Livewire, se requiere de darle algún feedback al usuario para informar del estatus del proceso, demasiada magia es malo.</p>
+        <p>Este tema, sobre select dependientes, estará divido en 2 partes, una donde dejare toda la fundación del mismo y mostrare la creación de este tipo de inputs sin ninguna librería Js, y el siguiente el cual continuara con lo que se creo acá y mostrara una tecnica que se puede utilizar para trabajar con Librerías JS como select2.</p>
 
-<p>Lo que se desea con las notificaciones, en teoría, es mostrar cierta información de cierta forma, y dependiendo de la información y contexto cambiará la notificación y sus atributos, ya que el back solo enviará la información, nos centraremos primero en el front.</p>
+<p>Livewire permite implementar select dependientes de forma muy sencilla, sin embargo, la utilización de librerías JS para la mejora del aspecto y nuevas funcionalidades a dichos elementos, complican en gran medida el trabajo de Livewire, debido a los cambios que realiza JS directamente sobre el html le hace imposible a Livewire llevar el control de los cambios en el DOM.</p>
 
-<p>Primero crearemos una vista, yo prefiero trabajar todo con componentes, donde estará la lógica de las notificaciones <strong>views/components/notify.blade.php</strong> aprovecharemos y tomaremos prestado uno de los ejemplos que están en la página de  <a href="https://sweetalert2.github.io/">sweetalert2</a> para toast y le haremos algunas modificaciones que explicare a continuacion.</p>
+<p>Para demostrar esto he decidido crear un proyecto sobre búsqueda de Digimons, a través de una api publica con la cual se debe seleccionar el LVL del digimon para luego poder seleccionar a un digimon que sea de ese lvl, algo bastante sencillo y directo.</p>
 
-<pre><code class="language-js">&lt;script&gt;
-   const ToastAlert = (type, title, text = '', timeout = 4000, position= 'top-end') =&gt; {
-       const Toast = Swal.mixin({
-           toast: true,
-           position: position,
-           showConfirmButton: false,
-           timer: timeout,
-           didOpen: toast =&gt; {
-               toast.addEventListener('mouseenter', Swal.stopTimer)
-               toast.addEventListener('mouseleave', Swal.resumeTimer)
-           }
-       })
-       Toast.fire({
-           icon: type,
-           title: title,
-           text: text
-       })
-   }
-   this.livewire.on('notify:toast', data =&gt; {
-       ToastAlert(data.type, data.title, data.text, data.timeout, data.position)
-   })
-&lt;/script&gt;
+<p>Para comenzar crearemos un componente Livewire para la busqueda y un controlador con un único método __invoke</p>
+
+<pre><code class="language-php">php artisan livewire:make Digimons.Search
+php artisan make:controller DigimonSimpleSearch -i
 </code></pre>
 
-<p>Toda la lógica de la notificación estará dentro de la Function expression llamada <strong>ToastAlert</strong>, quien aceptara los datos de configuración en el orden dado (sólo type y title son obligatorios), incluso se puede probar desde el navegador. Al final se enlaza un evento que se disparara desde Livewire el cual llamará a la función de la notificación.</p>
+<p>Ademas de una única ruta en el archivo web.php</p>
 
-<p>Lo único que falta es emitir el evento desde Livewire, lo cual se hace desde el componente Livewire con <strong>$this->emit()</strong> pasando el nombre del evento y las variables, como se ve a continuación.</p>
-
-<pre><code class="language-php">$this-&gt;emit('notify:toast', [
-    'type'  =&gt; 'success',
-    'title' =&gt; trans('notifications.user.created),
-]);
+<pre><code class="language-php">Route::get('/digimon-simple', DigimonSimpleSearchController::class)→name('search.simple');
 </code></pre>
 
-<p>Por último incluimos la librería JS(JavaScript) de sweetalert y el component, o vista con un include, al final del body, suponiendo que se tiene un layout en <strong>layout/app</strong> y simplificando un poco, el <strong>app.blade.php</strong> debería quedar parecido a lo siguiente.</p>
+<p>El contenido del controlador sera muy sencillo, solamente retornara la vista.</p>
 
-<pre><code class="language-php">&lt;!doctype html&gt;
-&lt;html lang="{{ str_replace('_', '-', app()-&gt;getLocale()) }}"&gt;
-&lt;head&gt;
-&lt;link href="{{ asset('css/app.min.css') }}" rel="stylesheet"&gt;
-   @stack('styles')
-   @livewireStyles
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;div&gt;
-   .
-   .
-   .
-   &lt;/div&gt;
-   &lt;script src="{{ asset('js/app.min.js') }}"&gt;&lt;/script&gt;
-   &lt;script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"&gt;&lt;/script&gt;
-   @yield('scripts')
-   @livewireScripts
-   @component('components.notify)
-   @endcomponent
-&lt;/body&gt;
-&lt;/html&gt;
+<pre><code class="language-php">    public function __invoke(Request $request)
+    {
+        return view('digimons.search.simple');
+    }
 </code></pre>
 
-<p>Como paso extra podemos mejorar un poco ese codigo JS JavaScript, para evitar declarar la const Toast y encadenar directamente las acciones de la siguiente forma.</p>
+<p>Adicionalmente, tendremos 3 vistas, una dentro de digimon>search llamada simple.blade.php y una para un componente de base para layout dentro de componentes llamado app, las dos bastante sencillas.</p>
 
-<pre><code class="language-js">&lt;script&gt;
-   const ToastAlert = (type, title, text = '', timeout = 4000, position= 'top-end') =&gt; {
-       Swal.mixin({
-           toast: true,
-           position: position,
-           showConfirmButton: false,
-           timer: timeout,
-           didOpen: toast =&gt; {
-               toast.addEventListener('mouseenter', Swal.stopTimer);
-               toast.addEventListener('mouseleave', Swal.resumeTimer);
-           }
-       }).fire({
-           icon: type,
-           title: title,
-           text: text
-       });
-   }
-   this.livewire.on('notify:toast', data =&gt; {
-       ToastAlert(data.type, data.title, data.text, data.timeout, data.position);
-   })
-&lt;/script&gt;
+<p>app.blade tendrá el esqueleto normal de un layout, agregando bootstrap y el css y js de Livewire.</p>
+
+<p>entro de simple.php tendremos un card el cual tendrá en el card body el componente Livewire para quedar así.</p>
+
+<pre><code class="language-html">&lt;x-app title='Busqueda sencilla'&gt;
+    &lt;x-slot name="body"&gt;
+        &lt;div class="d-flex justify-content-center"&gt;
+            &lt;div class="card col-6"&gt;
+                &lt;div class="card-title"&gt;Busqueda sencilla&lt;/div&gt;
+                &lt;div class="card-body"&gt;
+                    &lt;livewire:digimons.search&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/x-slot&gt;
+&lt;/x-app&gt;
+
 </code></pre>
 
-<p>Y eso es todo, se crea un function expression por cada tipo de notificación que se desee incluir, se pueden crear todas en el mismo archivo o en diferentes y agregarlos según sea necesario y a cada una se llamara con su propio evento.</p>
+<p>De momento el componente Livewire sera muy sencillo, contando con lo siguiente.</p>
+
+<pre><code class="language-php">    public $lvls = [
+        'fresh',
+        'training',
+        'rookie',
+        'champion',
+        'ultimate',
+        'mega',
+    ];
+    public $lvl, $digimon, $digimons = [];
+
+    public function render()
+    {
+        return view('livewire.digimons.search');
+    }
+
+</code></pre>
+
+<p>Tendremos entre las variables $lvls y $digimons, las cuales contendrán los listados que se utilizaran para rellenar las opciones de los select, ademas $lvl y $digimon, quienes tendrán las opciones seleccionadas, quedando la vista del Livewire de a siguiente manera.</p>
+
+<pre><code class="language-html">&lt;form&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="select"&gt;Select Lvl&lt;/label&gt;
+                &lt;div&gt;
+                  &lt;select id="select" name="select" class="custom-select" wire:model='lvl'&gt;
+                    &lt;option value=""&gt;Seleccione Lvl&lt;/option&gt;
+                      @foreach ($lvls as $item)
+                      &lt;option value="{{ $item }}"&gt;{{ $item }}&lt;/option&gt;
+                      @endforeach
+                  &lt;/select&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="col-6"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="select"&gt;Select&lt;/label&gt;
+                &lt;div&gt;
+                  &lt;select id="select" name="select" class="custom-select" wire:model='digimon'&gt;
+                    @foreach ($digimons as $item)
+                        &lt;option value="{{ $item['name'] }}"&gt;{{ $item['name'] }}&lt;/option&gt;
+                    @endforeach
+                  &lt;/select&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+    &lt;/div&gt;
+        &lt;div wire:loading.delay&gt;
+            Loading content...
+        &lt;/div&gt;
+    &lt;div class="form-group row"&gt;
+        &lt;div class="offset-4 col-8"&gt;
+            &lt;button name="submit" type="submit" class="btn btn-primary"&gt;Submit&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>De momento solo el listado de lvls es funcional, ahora lo que toca es enlazar el cambio de lvl con el listado de digimons a travez de Lifecycle Hooks, tomaremos el update de $lvl para activarlo de la siguiente manera.</p>
+
+<pre><code class="language-php">    public function updatingLvl($value)
+    {
+        $request        = Http::get(‘https://digimon-api.vercel.app/api/digimon/level/’ . $value);
+        $this-&gt;digimons = new \Illuminate\Support\Collection($request-&gt;json());
+    }
+</code></pre>
+
+<p>Utilizamos la librería Http de Laravel para hacer un request a la endpoint del api, y colocamos el resultado dentro de una colleccion lo cual nos ayudara mas adelante.</p>
+
+<p>Ya con esto esta completamente funcional los dos select, de esta forma, haciendo una pequeña refactorizacion, y agregando una funcionalidad extra (avatar) la cual explotaremos en el post final, el componente de livewire quedaría de la siguiente manera</p>
+
+<pre><code class="language-php">&lt;?php
+
+namespace App\Http\Livewire\Digimons;
+
+use Illuminate\Support\Facades\Http;
+use Livewire\Component;
+
+class Search extends Component
+{
+    public $lvls = [
+        'fresh',
+        'training',
+        'rookie',
+        'champion',
+        'ultimate',
+        'mega',
+    ];
+    public $lvl, $digimon, $avatar, $baseUrl, $digimons;
+
+    public function mount()
+    {
+        $this-&gt;baseUrl  = 'https://digimon-api.vercel.app/api/digimon/level/';
+        $this-&gt;digimons = new \Illuminate\Support\Collection([]);
+    }
+
+    public function render()
+    {
+        return view('livewire.digimons.search');
+    }
+
+    public function updatingLvl($value)
+    {
+        $request        = Http::get($this-&gt;baseUrl . $value);
+        $this-&gt;digimons = new \Illuminate\Support\Collection($request-&gt;json());
+        $this-&gt;avatar = $this-&gt;digimons-&gt;first()['img'];
+    }
+
+    public function updatingDigimon($value)
+    {
+        $this-&gt;avatar = $this-&gt;digimons-&gt;where('name', $value)-&gt;first()['img'];
+    }
+}
+</code></pre>
     </div>
 
     <nav class="flex justify-between text-sm md:text-base">
         <div>
-                            <a href="https://desolatormagno.github.io/es/blog/livewire-tips" title="Older Post: Livewire extra tips">
-                    &LeftArrow; Livewire extra tips
+                            <a href="https://desolatormagno.github.io/es/blog/livewire-notifications" title="Older Post: Notificaciones con SweetAlert2 desde Livewire">
+                    &LeftArrow; Notificaciones con SweetAlert2 desde Livewire
                 </a>
                     </div>
 
         <div>
-                            <a href="https://desolatormagno.github.io/es/blog/livewire-select" title="Newer Post: Select dependiente desde Livewire">
-                    Select dependiente desde Livewire &RightArrow;
-                </a>
                     </div>
     </nav>
         </main>
@@ -291,14 +350,14 @@
 </script>
         <script>
     function updateLang() {
-        let url = "https://desolatormagno.github.io/es/blog/livewire-notifications"
+        let url = "https://desolatormagno.github.io/es/blog/livewire-select"
         let newlang = document.getElementById(this.id).value
         if (1) {
             let lang = "es"
             url = url.replace('/' + lang ,'/' + newlang)
         } else {
             //Else (la pagina no tiene idioma y se lo agrego)
-            url = url.replace("/es/blog/livewire-notifications", '/' + newlang + "/es/blog/livewire-notifications")
+            url = url.replace("/es/blog/livewire-select", '/' + newlang + "/es/blog/livewire-select")
         }
         window.location.href = url
     }
