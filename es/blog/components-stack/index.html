@@ -6,20 +6,20 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="description" content="Sitio personal de Reny Ramos @DesolatorMagno">
 
-        <meta property="og:title" content="Components - Layout | DesolatorMagno Blog"/>
+        <meta property="og:title" content="Components - Stack | DesolatorMagno Blog"/>
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://desolatormagno.github.io/es/blog/component-as-layout"/>
+        <meta property="og:url" content="https://desolatormagno.github.io/es/blog/components-stack"/>
         <meta property="og:description" content="Sitio personal de Reny Ramos @DesolatorMagno" />
 
-        <title>Components - Layout | DesolatorMagno Blog</title>
+        <title>Components - Stack | DesolatorMagno Blog</title>
 
         <link rel="home" href="https://desolatormagno.github.io">
         <link rel="icon" href="/favicon.ico">
         <link href="/blog/feed.atom" type="application/atom+xml" rel="alternate" title="DesolatorMagno Blog Atom Feed">
-            <meta property="og:title" content="Components - Layout" />
+            <meta property="og:title" content="Components - Stack" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://desolatormagno.github.io/es/blog/component-as-layout"/>
-    <meta property="og:description" content="Creacion del layout base utilizando componentes." />
+    <meta property="og:url" content="https://desolatormagno.github.io/es/blog/components-stack"/>
+    <meta property="og:description" content="Components para el manejo de JS y CSS de librerias externas." />
 
                     <!-- Insert analytics code here -->
         
@@ -119,7 +119,7 @@
 
         <main role="main" class="flex-auto w-full container max-w-4xl mx-auto py-16 px-6">
                 
-    <h1 class="leading-none mb-2">Components - Layout</h1>
+    <h1 class="leading-none mb-2">Components - Stack</h1>
 
     <p class="text-gray-700 text-xl md:mt-0">Reny Ramos  •  December 2, 2020</p>
     
@@ -145,58 +145,65 @@
             >programming</a>
             
     <div class="border-b border-blue-200 mb-10 pb-4" v-pre>
-        <p>Usualmente para el desarrollo de aplicaciones se trabaja sobre una plantilla o layout base la cual a su vez puede estar compuesta por varias vistas parciales, inclusive se puede tener varias plantillas para diferentes secciones, al final lo importante es tener algo sobre lo que trabajar de lo cual se extiende y se modifica según sea necesario, sobre todo esto se encuentra una explicación bastante detallada en la <a href="https://laravel.com/docs/8.x/blade#introduction">documentación oficial</a>.</p>
+        <p>Continuando con el post anterior, la idea de tener una plantilla general es que tenga solo el código y librerías JS que serán necesarias en todas las vistas, y que desde cada vista se puedan incluir las librerías o código extra necesario, esto es muy importante para mantener las vistas lo mas ligeras y limpias posibles.</p>
 
-<p>Las mejoras realizadas sobre la parte de componentes en las ultimas versiones, ha permitido que sea mas fácil y cómodo trabajar con dichos componentes, lo cual abrió las puertas para nuevas aplicaciones, entre ellas el uso de componentes para el layout, lo cual sera el tema de hoy.</p>
+<p>La idea aquí sera, que a partir de una vista principal que llama a los demás componentes podamos incluir librerías y código JS, ademas de hojas de estilo, utilizando para ellos componentes, para así poder administrar esto de una forma mucho mas cómoda, sencilla y visual.</p>
 
-<p>Comenzaremos con lo básico, la creación del archivo, en esta parte realmente no hay una regla como tal para el nombrado y ubicación de los archivos (fuera del hecho de que sera dentro de <strong>views/components</strong>, y las <a href="https://spatie.be/guidelines/laravel-php#views">guidelines</a> de spatie, para el resto toca usar el sentido común).</p>
+<p>Para crear cada uno de estos componentes lo primero es visitar la pagina oficial y comprobar en la documentación que código JS y estilos necesita para funcionar, ya con esto se crea el archivo el cual hará push a los stack correspondientes y estará listo para su uso.</p>
 
-<p>Para este caso creare mi archivo principal <strong>app.blade.php</strong> dentro de la carpeta <strong>components/layouts</strong>, dicho archivo contendrá la base del html y estará conformado por slots por cada seccion que se requiera, en cuanto a secciones o slots, estas variaran dependiendo del proyecto, de momento utilizare las mas comunes para mi:</p>
+<p>Ya que realmente no es muy complicado iré directo a mostrar 2 ejemplos: Laravel Livewire y Select2, y como quedaría la vista que los incluye:</p>
 
-<ul>
-<li>$meta = campos meta extras.</li>
-<li>$title = Titulo de la pagina en especifico</li>
-<li>$style = codigo css especifico de la pagina</li>
-<li>$body = Contenido de la pagina</li>
-<li>$script = codigo js</li>
-</ul>
+<h2>Funcionalidades (views/components/layouts/partials)</h2>
 
-<p>Como nota adicional diré, que aun si estamos trabajando con componentes no tenemos porque huir de practicas anteriores como secciones y stack, ya que la idea es crear algo útil y cómodo para trabajar, no volvernos religiosos sobre un nuevo paradigma, es por eso que decidí agregar stack para js y css en el template.</p>
+<h3>addSelect2.blade.php</h3>
 
-<p>Tomando todo eso en cuenta, el esqueleto de nuestra plantilla base quedara mas o menos asi</p>
-
-<pre><code class="language-php">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
-    {{ $meta ?? '' }}
-    &lt;title&gt;{{ $title ?? config(‘app.name’) }}&lt;/title&gt;
-    @stack('style')
-    {{ $style ?? '' }}
-&lt;/head&gt;
-&lt;body&gt;
-    {{ $body }}
-    @stack('script')
-    {{ $css ?? '' }}
-&lt;/body&gt;
-&lt;/html&gt;
+<pre><code class="language-php">@push('style') 
+&lt;link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /&gt; 
+@endpush
+@push('scripts') 
+&lt;script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"&gt;&lt;/script&gt; 
+@endpush
 </code></pre>
 
-<p>Dentro de la plantilla solamente $body sera requerido, todo lo demás sera opcional, e inclusive colocamos el nombre de la app como default para titulo de la pagina, ya con esto estaríamos cubriendo lo mínimo necesario para que se utilizable. La vista resultante se puede ver en el siguiente <a href="https://gist.github.com/DesolatorMagno/19b1c13f862ec2f304c7686e0ed6a849">gist</a>, y la implementación de la misma en el <a href="https://github.com/DesolatorMagno/DigiSearch">repositorio</a> de digimon.</p>
+<h3>addLivewire.blade.php</h3>
 
-<p>En el siguiente post hablare sobre creación de add-on con componentes, una idea con la cual he estado experimentando y que me ha parecido bastante útil.</p>
+<pre><code class="language-php">@push('style') @livewireStyles @endpush @prepend('scripts') @livewireScripts @endprepend
+</code></pre>
+
+<h2>Vista (views/search)</h2>
+
+<h3>index.blade.php</h3>
+
+<pre><code class="language-php">&lt;x-layouts.app title='Busqueda sencilla'&gt;
+    &lt;x-slot name="body"&gt;
+        &lt;div class="d-flex justify-content-center"&gt;
+            &lt;div class="card col-6"&gt;
+                &lt;div class="card-title"&gt;Busqueda sencilla&lt;/div&gt;
+                &lt;div class="card-body"&gt;
+                    &lt;livewire:digimons.search&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/x-slot&gt;
+    &lt;x-layouts.partials.addLivewire/&gt;
+    &lt;x-layouts.partials.addSelect2/&gt;
+&lt;/x-app&gt;
+</code></pre>
+
+<p>En teoría suena algo muy simple y quizás no se le ve mucho el uso, pero en la practica es cuando realmente se puede ver como mejora el código, haciéndolo mas corto y entendible, para ver esto en efecto pueden ir al <a href="https://github.com/DesolatorMagno/DigiSearch/tree/components_stack">repositorio</a> de DigiSearch, donde aplique lo aquí mostrado.</p>
     </div>
 
     <nav class="flex justify-between text-sm md:text-base">
         <div>
-                            <a href="https://desolatormagno.github.io/es/blog/components-stack" title="Older Post: Components - Stack">
-                    &LeftArrow; Components - Stack
+                            <a href="https://desolatormagno.github.io/es/blog/livewire-select2" title="Older Post: Select dependiente desde Livewire parte 2">
+                    &LeftArrow; Select dependiente desde Livewire parte 2
                 </a>
                     </div>
 
         <div>
+                            <a href="https://desolatormagno.github.io/es/blog/component-as-layout" title="Newer Post: Components - Layout">
+                    Components - Layout &RightArrow;
+                </a>
                     </div>
     </nav>
         </main>
@@ -228,14 +235,14 @@
 </script>
         <script>
     function updateLang() {
-        let url = "https://desolatormagno.github.io/es/blog/component-as-layout"
+        let url = "https://desolatormagno.github.io/es/blog/components-stack"
         let newlang = document.getElementById(this.id).value
         if (1) {
             let lang = "es"
             url = url.replace('/' + lang ,'/' + newlang)
         } else {
             //Else (la pagina no tiene idioma y se lo agrego)
-            url = url.replace("/es/blog/component-as-layout", '/' + newlang + "/es/blog/component-as-layout")
+            url = url.replace("/es/blog/components-stack", '/' + newlang + "/es/blog/components-stack")
         }
         window.location.href = url
     }
